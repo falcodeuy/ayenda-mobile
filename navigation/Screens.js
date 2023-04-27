@@ -5,7 +5,7 @@ import { nowTheme, tabs } from '../constants';
 
 import Articles from '../screens/Articles';
 import { Block } from 'galio-framework';
-import Components from '../screens/Components';
+
 // drawer
 import CustomDrawerContent from './Menu';
 // screens
@@ -24,29 +24,6 @@ const { width } = Dimensions.get('screen');
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
-
-function ComponentsStack(props) {
-  return (
-    <Stack.Navigator
-      initialRouteName="Components"
-      screenOptions={{
-        mode: 'card',
-        headerShown: 'screen',
-      }}
-    >
-      <Stack.Screen
-        name="Components"
-        component={Components}
-        options={{
-          header: ({ navigation, scene }) => (
-            <Header title="Components" navigation={navigation} scene={scene} />
-          ),
-          backgroundColor: '#FFFFFF',
-        }}
-      />
-    </Stack.Navigator>
-  );
-}
 
 function ArticlesStack(props) {
   return (
@@ -169,7 +146,7 @@ function AppStack(props) {
         backgroundColor: nowTheme.COLORS.PRIMARY,
         width: width * 0.8,
       }}
-      drawerContentOptions={{
+      screenOptions={{
         activeTintcolor: nowTheme.COLORS.WHITE,
         inactiveTintColor: nowTheme.COLORS.WHITE,
         activeBackgroundColor: 'transparent',
@@ -198,13 +175,7 @@ function AppStack(props) {
           headerShown: false,
         }}
       />
-      <Drawer.Screen
-        name="Components"
-        component={ComponentsStack}
-        options={{
-          headerShown: false,
-        }}
-      />
+
       <Drawer.Screen
         name="Articles"
         component={ArticlesStack}
