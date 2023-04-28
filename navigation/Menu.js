@@ -1,17 +1,13 @@
 import { Block, Text, theme } from 'galio-framework';
-import { Dimensions, Image, Linking, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
+import { Image, ScrollView, StyleSheet } from 'react-native';
 import { DrawerItem as DrawerCustomItem, Icon } from '../components';
 
 import Images from '../constants/Images';
 import React from 'react';
 import nowTheme from '../constants/Theme';
-import { useSafeArea } from 'react-native-safe-area-context';
-
-const { width } = Dimensions.get('screen');
 
 function CustomDrawerContent({ drawerPosition, navigation, profile, focused, state, ...rest }) {
-  const insets = useSafeArea();
-  const screens = ['Home', 'Components', 'Articles', 'Profile', 'Account'];
+  const screens = ['Hoy', 'Agenda', 'Estadísticas'];
   return (
     <Block style={styles.container} forceInset={{ top: 'always', horizontal: 'never' }}>
       <Block style={styles.header}>
@@ -41,21 +37,8 @@ function CustomDrawerContent({ drawerPosition, navigation, profile, focused, sta
                 marginHorizontal: 10,
               }}
             />
-            <Text
-              color={nowTheme.COLORS.BLACK}
-              style={{
-                marginTop: 30,
-                marginLeft: 20,
-                marginBottom: 10,
-                fontFamily: 'montserrat-regular',
-                fontWeight: '300',
-                fontSize: 12,
-              }}
-            >
-              DOCUMENTATION
-            </Text>
           </Block>
-          <DrawerCustomItem title="GETTING STARTED" navigation={navigation} />
+          <DrawerCustomItem title="Perfil de tienda" navigation={navigation} />
           <DrawerCustomItem title="LOGOUT" navigation={navigation} />
         </ScrollView>
       </Block>

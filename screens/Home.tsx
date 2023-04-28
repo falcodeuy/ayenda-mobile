@@ -7,11 +7,11 @@ import articles from '../constants/articles';
 const { width } = Dimensions.get('screen');
 
 type Article = {
-  title: string,
-  subtitle: string,
-  description: string,
-  image: any,
-  cta: string,
+  title: string;
+  subtitle: string;
+  description: string;
+  image: any;
+  cta: string;
 };
 
 const article: Article = {
@@ -23,19 +23,13 @@ const article: Article = {
 };
 
 const Home: React.FC = () => {
-  const renderArticles = () => {
-    return (
-      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.articles}>
-        <Block flex>
-          <Card item={article} horizontal />
-        </Block>
-      </ScrollView>
-    );
-  };
-
   return (
     <Block flex center style={styles.home}>
-      {renderArticles()}
+      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.articles}>
+        <Block flex>
+          <Card item={article} full />
+        </Block>
+      </ScrollView>
     </Block>
   );
 };

@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Now UI React Native",
+    "name": "Ayenda",
     "slug": "now-ui-react-native",
     "privacy": "public",
     "platforms": ["ios", "android"],
@@ -16,12 +16,9 @@
       "fallbackToCacheTimeout": 0
     },
     "assetBundlePatterns": ["**/*"],
-    "android": {
-      "enableHermes": false
-    },
     "ios": {
       "supportsTablet": true
     },
-    "description": "Now UI React Native, based on Now UI Design System. Coded by Creative Tim"
+    "description": "Ayenda para proveedores de servicios."
   }
 }

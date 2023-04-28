@@ -1,22 +1,18 @@
 import { Animated, Dimensions, Easing } from 'react-native';
 // header for screens
-import { Header, Icon } from '../components';
-import { nowTheme, tabs } from '../constants';
+import { Header } from '../components';
+import { nowTheme } from '../constants';
 
 import Articles from '../screens/Articles';
-import { Block } from 'galio-framework';
 
 // drawer
 import CustomDrawerContent from './Menu';
 // screens
 import Home from '../screens/Home';
-import Onboarding from '../screens/Onboarding';
 import Pro from '../screens/Pro';
 import Profile from '../screens/Profile';
 import React from 'react';
 import Register from '../screens/Register';
-import SettingsScreen from '../screens/Settings';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -175,14 +171,6 @@ function AppStack(props) {
           headerShown: false,
         }}
       />
-
-      <Drawer.Screen
-        name="Articles"
-        component={ArticlesStack}
-        options={{
-          headerShown: false,
-        }}
-      />
       <Drawer.Screen
         name="Profile"
         component={ProfileStack}
@@ -201,7 +189,7 @@ function AppStack(props) {
   );
 }
 
-export default function OnboardingStack(props) {
+export default function (props) {
   return (
     <Stack.Navigator
       screenOptions={{
@@ -209,13 +197,6 @@ export default function OnboardingStack(props) {
         headerShown: false,
       }}
     >
-      <Stack.Screen
-        name="Onboarding"
-        component={Onboarding}
-        option={{
-          headerTransparent: true,
-        }}
-      />
       <Stack.Screen name="App" component={AppStack} />
     </Stack.Navigator>
   );
