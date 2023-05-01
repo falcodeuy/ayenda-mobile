@@ -1,21 +1,26 @@
 import React from 'react';
 import * as eva from '@eva-design/eva';
-import { ApplicationProvider, Layout, Button } from '@ui-kitten/components';
+import { ApplicationProvider, IconRegistry } from '@ui-kitten/components';
+import { EvaIconsPack } from '@ui-kitten/eva-icons';
+
+import { AppNavigator } from './navigation';
+
 import { default as theme } from './theme.json';
 
 export default () => {
   const darkMode = false;
 
   return (
-    <ApplicationProvider
-      {...eva}
-      theme={darkMode ? { ...eva.dark, ...theme } : { ...eva.light, ...theme }}
-    >
-      <Layout
-        style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
+    <>
+      <IconRegistry icons={EvaIconsPack} />
+      <ApplicationProvider
+        {...eva}
+        theme={
+          darkMode ? { ...eva.dark, ...theme } : { ...eva.light, ...theme }
+        }
       >
-        <Button>HOME</Button>
-      </Layout>
-    </ApplicationProvider>
+        <AppNavigator />
+      </ApplicationProvider>
+    </>
   );
 };
