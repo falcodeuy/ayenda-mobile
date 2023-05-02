@@ -2,33 +2,20 @@ import React from 'react';
 import { SafeAreaView } from 'react-native';
 import {
   Divider,
-  Icon,
   Layout,
   Text,
   TopNavigation,
   TopNavigationAction,
-  Button,
-  IconElement,
+  // Icon
 } from '@ui-kitten/components';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { StyleSheet } from 'react-native';
 
 import { RootStackParamList } from '../types';
+import Icon from '../components/Icon';
 
 type DetailsScreenProps = {
   navigation: StackNavigationProp<RootStackParamList, 'Details'>;
 };
-
-const IconSimpleUsageShowcase = (): IconElement => (
-  <Icon style={styles.icon} fill="#8F9BB3" name="arrow-back-outline" />
-);
-
-const styles = StyleSheet.create({
-  icon: {
-    width: 32,
-    height: 32,
-  },
-});
 
 const DetailsScreen: React.FC<DetailsScreenProps> = ({ navigation }) => {
   const navigateBack = () => {
@@ -37,7 +24,7 @@ const DetailsScreen: React.FC<DetailsScreenProps> = ({ navigation }) => {
 
   const BackAction = () => (
     <TopNavigationAction
-      icon={<IconSimpleUsageShowcase />}
+      icon={<Icon name="arrow-back-outline" />}
       onPress={navigateBack}
     />
   );
@@ -45,7 +32,7 @@ const DetailsScreen: React.FC<DetailsScreenProps> = ({ navigation }) => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <TopNavigation
-        title="MyApp"
+        title="Ayenda"
         alignment="center"
         accessoryLeft={BackAction}
       />
