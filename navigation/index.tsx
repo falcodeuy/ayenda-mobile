@@ -1,12 +1,12 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { BottomNavigation, BottomNavigationTab } from '@ui-kitten/components';
 
 import HomeScreen from '../screens/Home';
 import DetailsScreen from '../screens/Details';
 import { RootStackParamList } from '../types';
+import Icon from '../components/Icon';
 
 const BottomStack = createBottomTabNavigator<RootStackParamList>();
 
@@ -15,14 +15,31 @@ const BottomTabBar = ({ navigation, state }) => (
     selectedIndex={state.index}
     onSelect={(index) => navigation.navigate(state.routeNames[index])}
   >
-    <BottomNavigationTab title="Home" />
-    <BottomNavigationTab title="Details" />
+    <BottomNavigationTab title="Agenda" icon={<Icon name="calendar" />} />
+    <BottomNavigationTab
+      title="Estadísticas"
+      icon={<Icon name="bar-chart" />}
+    />
+    <BottomNavigationTab title="Perfil" icon={<Icon name="person" />} />
   </BottomNavigation>
 );
 const TabNavigator = () => (
   <BottomStack.Navigator tabBar={(props) => <BottomTabBar {...props} />}>
-    <BottomStack.Screen name="Home" component={HomeScreen} />
-    <BottomStack.Screen name="Details" component={DetailsScreen} />
+    <BottomStack.Screen
+      name="Home"
+      component={HomeScreen}
+      options={{ headerShown: false }}
+    />
+    <BottomStack.Screen
+      name="Details"
+      component={DetailsScreen}
+      options={{ headerShown: false }}
+    />
+    <BottomStack.Screen
+      name="Profile"
+      component={DetailsScreen}
+      options={{ headerTitle: 'Perfil' }}
+    />
   </BottomStack.Navigator>
 );
 

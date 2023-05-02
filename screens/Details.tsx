@@ -18,25 +18,8 @@ type DetailsScreenProps = {
 };
 
 const DetailsScreen: React.FC<DetailsScreenProps> = ({ navigation }) => {
-  const navigateBack = () => {
-    navigation.goBack();
-  };
-
-  const BackAction = () => (
-    <TopNavigationAction
-      icon={<Icon name="arrow-back-outline" />}
-      onPress={navigateBack}
-    />
-  );
-
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <TopNavigation
-        title="Ayenda"
-        alignment="center"
-        accessoryLeft={BackAction}
-      />
-      <Divider />
       <Layout
         style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
       >
