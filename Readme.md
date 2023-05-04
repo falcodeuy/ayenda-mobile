@@ -2,13 +2,23 @@
 
 > The mobile app that **service provider** users use.
 
-## Run the project
+## Install dependencies
+
+#### Initially install all dependencies
 
 ```bash
 yarn install
 ```
 
-## Run the app
+#### Installing new particular dependencies
+
+```bash
+npx expo install <dependency>
+```
+
+> We use Expo for this although Expo uses yarn under the hood cause it takes care of packages compatibility according to the Expo SDK version in use.
+
+## Run the project
 
 ```bash
 yarn start
