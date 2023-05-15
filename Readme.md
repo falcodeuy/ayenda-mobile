@@ -1,4 +1,4 @@
-### Ayenda mobile app
+# Ayenda mobile app
 
 > The mobile app that **service provider** users use.
 
