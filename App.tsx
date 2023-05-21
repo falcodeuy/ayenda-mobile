@@ -6,6 +6,7 @@ import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import AppNavigator from './navigation';
 
 import { default as theme } from './theme.json';
+import AuthNavigator from './navigation/AuthNavigator';
 
 export default () => {
   const darkMode = false;
@@ -19,7 +20,8 @@ export default () => {
           darkMode ? { ...eva.dark, ...theme } : { ...eva.light, ...theme }
         }
       >
-        <AppNavigator />
+        {/* <AppNavigator /> */}
+        <AuthNavigator />
       </ApplicationProvider>
     </>
   );
