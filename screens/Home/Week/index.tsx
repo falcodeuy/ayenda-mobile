@@ -3,7 +3,7 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Text } from '@ui-kitten/components';
 
-import { RootStackParamList } from '../../types';
+import { RootStackParamList } from '../../../types';
 
 type HomeScreenProps = {
   navigation: StackNavigationProp<RootStackParamList, 'Home'>;
