@@ -1,6 +1,6 @@
 import { Button, Input, Layout, Text } from '@ui-kitten/components';
 import React, { ReactElement } from 'react';
-import { StyleSheet, TouchableWithoutFeedback } from 'react-native';
+import { StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Icon from '../../components/Icon';
 
@@ -19,7 +19,9 @@ const Login = ({ navigation }): React.ReactElement => {
 
   const renderPasswordIcon = (props: any): ReactElement => (
     <TouchableWithoutFeedback onPress={onPasswordIconPress}>
-      <Icon {...props} name={passwordVisible ? 'eye-off' : 'eye'} />
+      <View>
+        <Icon {...props} name={passwordVisible ? 'eye-off' : 'eye'} />
+      </View>
     </TouchableWithoutFeedback>
   );
 
