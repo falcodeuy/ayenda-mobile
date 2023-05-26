@@ -1,7 +1,6 @@
 import { Button, Input, Layout, Text } from '@ui-kitten/components';
 import React, { ReactElement, useState } from 'react';
 import { StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import Icon from '../../components/Icon';
 
 const Login = ({ navigation }): React.ReactElement => {
@@ -34,7 +33,7 @@ const Login = ({ navigation }): React.ReactElement => {
   );
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <>
       {/* <KeyboardAvoidingView behavior="padding" style={styles.container}> */}
       <Layout style={styles.container}>
         <Layout style={styles.headerContainer}>
@@ -113,7 +112,7 @@ const Login = ({ navigation }): React.ReactElement => {
         </Button>
       </Layout>
       {/* </KeyboardAvoidingView> */}
-    </SafeAreaView>
+    </>
   );
 };
 
