@@ -2,6 +2,7 @@ import { Button, Input, Layout, Text } from '@ui-kitten/components';
 import React, { ReactElement, useState } from 'react';
 import { StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
 import Icon from '../../components/Icon';
+import Divider from '../../components/Divider';
 
 const Login = ({ navigation }): React.ReactElement => {
   const [email, setEmail] = useState<string>();
@@ -76,12 +77,12 @@ const Login = ({ navigation }): React.ReactElement => {
           INICIAR SESIÓN
         </Button>
         <Layout style={styles.socialAuthContainer}>
-          <Text
-            style={styles.socialAuthHintText}
-            // status='control'
-          >
-            o continuar con
-          </Text>
+          <Layout style={styles.socialAuthTextContainer}>
+            <Divider size={100} />
+            <Text style={styles.socialAuthHintText}>o continuar con</Text>
+            <Divider size={100} />
+          </Layout>
+
           <Layout style={styles.socialAuthButtonsContainer}>
             <Button
               appearance="ghost"
@@ -105,9 +106,10 @@ const Login = ({ navigation }): React.ReactElement => {
         </Layout>
         <Button
           style={styles.signUpButton}
-          appearance='ghost'
+          appearance="ghost"
           // status='control'
-          onPress={onSignUpButtonPress}>
+          onPress={onSignUpButtonPress}
+        >
           ¿Nuevo en Ayenda? Regístrate
         </Button>
       </Layout>
@@ -156,8 +158,15 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
   },
   socialAuthHintText: {
-    alignSelf: 'center',
-    marginBottom: 16,
+    // alignSelf: 'center',
+    marginBottom: 5,
+  },
+  socialAuthTextContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginVertical: 10,
+    marginHorizontal: 16,
   },
 });
 
