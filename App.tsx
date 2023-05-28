@@ -42,10 +42,6 @@ export default () => {
   return (
     <QueryClientProvider client={queryClient}>
       <SafeAreaProvider>
-        {/* <StatusBar
-        barStyle={darkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={darkMode ? '#000000' : '#FFFFFF'}
-      /> */}
         <CustomStatusBar
           barStyle={darkMode ? 'light-content' : 'dark-content'}
           backgroundColor={darkMode ? '#000000' : '#FFFFFF'}
