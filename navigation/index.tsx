@@ -6,6 +6,7 @@ import DetailsScreen from '../screens/Details';
 import { RootStackParamList } from '../types';
 import Icon from '../components/Icon';
 import HomeNavigator from './HomeNavigator';
+import AccountNavigator from './AccountNavigator';
 
 const BottomStack = createBottomTabNavigator<RootStackParamList>();
 
@@ -37,7 +38,7 @@ const BottomTabNavigator = () => (
     />
     <BottomStack.Screen
       name="Profile"
-      component={DetailsScreen}
+      component={AccountNavigator}
       options={{ headerTitle: 'Perfil' }}
     />
   </BottomStack.Navigator>

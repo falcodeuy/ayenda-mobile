@@ -2,8 +2,8 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import { TabBar, Tab } from '@ui-kitten/components';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import Today from '../screens/Home/Today';
-import Week from '../screens/Home/Week';
+import Today from '../screens/Today';
+import Week from '../screens/Week';
 
 const HomeTopTabStack = createMaterialTopTabNavigator();
 
