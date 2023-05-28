@@ -1,7 +1,6 @@
 import React from 'react';
-import { Icon, IconElement } from '@ui-kitten/components';
+import { Icon } from '@ui-kitten/components';
 import { StyleSheet } from 'react-native';
-import { SvgProps } from 'react-native-svg';
 
 // We're using this to render Eva icons in our app. (The normal way shown in UI Kitten docs doesn't work with our stack).
 // So the name of the icon is any valid name in the Eva Icons library: https://akveo.github.io/eva-icons/
