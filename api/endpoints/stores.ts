@@ -20,4 +20,14 @@ const getServices = async (id?: number) => {
   }
 };
 
-export { getStores, getServices };
+const createUser = async (loginData: { username: string; email: string; password: string; password2: string; is_customer: boolean; is_service_provider: boolean; }) => {
+  const url = '/users';
+  try {
+    const response = await axiosInstance.post(url, loginData);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export { getStores, getServices, createUser };
