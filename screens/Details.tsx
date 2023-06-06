@@ -1,14 +1,7 @@
 import React from 'react';
-import { SafeAreaView } from 'react-native';
-import {
-  Divider,
-  Layout,
-  Text,
-  TopNavigation,
-  TopNavigationAction,
-  // Icon
-} from '@ui-kitten/components';
+import { Divider, Layout, Text } from '@ui-kitten/components';
 import { StackNavigationProp } from '@react-navigation/stack';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { RootStackParamList } from '../types';
 import Icon from '../components/Icon';

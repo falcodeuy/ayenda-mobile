@@ -1,6 +1,7 @@
 import * as eva from '@eva-design/eva';
 import { ApplicationProvider, IconRegistry } from '@ui-kitten/components';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
+import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 
 import { default as theme } from './theme.json';
 import AuthNavigator from './navigation/AuthNavigator';
@@ -35,24 +36,27 @@ CustomStatusBarProps): React.ReactElement => {
 };
 
 export default () => {
+  const queryClient = new QueryClient();
   const darkMode = false;
 
   return (
-    <SafeAreaProvider>
-      <CustomStatusBar
-        barStyle={darkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={darkMode ? '#000000' : '#FFFFFF'}
-      />
-      <IconRegistry icons={EvaIconsPack} />
-      <ApplicationProvider
-        {...eva}
-        theme={
-          darkMode ? { ...eva.dark, ...theme } : { ...eva.light, ...theme }
-        }
-      >
-        {/* <AppNavigator /> */}
-        <AuthNavigator />
-      </ApplicationProvider>
-    </SafeAreaProvider>
+    <QueryClientProvider client={queryClient}>
+      <SafeAreaProvider>
+        <CustomStatusBar
+          barStyle={darkMode ? 'light-content' : 'dark-content'}
+          backgroundColor={darkMode ? '#000000' : '#FFFFFF'}
+        />
+        <IconRegistry icons={EvaIconsPack} />
+        <ApplicationProvider
+          {...eva}
+          theme={
+            darkMode ? { ...eva.dark, ...theme } : { ...eva.light, ...theme }
+          }
+        >
+          {/* <AppNavigator /> */}
+          <AuthNavigator />
+        </ApplicationProvider>
+      </SafeAreaProvider>
+    </QueryClientProvider>
   );
 };
