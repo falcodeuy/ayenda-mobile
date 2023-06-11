@@ -5,6 +5,7 @@ import { getServices } from '../../../api/endpoints';
 
 import { RootStackParamList } from '../../../types';
 import AppointmentCard from './AppointmentCard';
+import { Text } from '@ui-kitten/components';
 
 type HomeScreenProps = {
   navigation: StackNavigationProp<RootStackParamList, 'Home'>;
@@ -20,18 +21,19 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
   } = useQuery(['services'], () => getServices());
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Text>Loading...</Text>;
   }
 
   if (isError) {
-    return <div>Error</div>;
+    return <Text>Error...</Text>;
   }
 
-  return (
-    services &&
+  return services ? (
     services.map((service: any) => (
       <AppointmentCard key={service.id} service={service} />
     ))
+  ) : (
+    <Text>No hay servicios disponibles</Text>
   );
 };
 

@@ -1,7 +1,5 @@
-import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import { TabBar, Tab, Layout, Text } from '@ui-kitten/components';
+import { TabBar, Tab } from '@ui-kitten/components';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import Today from '../screens/Home/Today';
