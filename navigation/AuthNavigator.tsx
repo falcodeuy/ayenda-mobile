@@ -1,18 +1,23 @@
-import React, { useEffect, useState } from 'react'
-import SignedOutNavigator from './SignedOutNavigator'
+import React from 'react';
+import { createStackNavigator } from '@react-navigation/stack';
+import Login from '../screens/Login';
+import SignUp from '../screens/SignUp';
+import ForgotPassword from '../screens/ForgotPassword/ForgotPassword';
 // import { SignedInStack, SignedOutStack } from './navigation'
 
+const AuthStack = createStackNavigator();
+
 const AuthNavigator: React.FC = () => {
-    // const [currentUser, setCurrentUser] = useState<any>(null)
+  return (
+    <AuthStack.Navigator
+      initialRouteName="Login"
+      screenOptions={{ headerShown: false }}
+    >
+      <AuthStack.Screen name="Login" component={Login} />
+      <AuthStack.Screen name="SignUp" component={SignUp} />
+      <AuthStack.Screen name="ForgotPassword" component={ForgotPassword} />
+    </AuthStack.Navigator>
+  );
+};
 
-    // const userHandler = user => user ? setCurrentUser(user) : setCurrentUser(null)
-
-    useEffect(() => {
-        
-    }, [])
-
-    // return <>{currentUser ? <SignedInStack /> : <SignedOutStack />}</>
-    return <SignedOutNavigator /> 
-}
-
-export default AuthNavigator
+export default AuthNavigator;
