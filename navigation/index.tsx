@@ -1,5 +1,4 @@
 import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { BottomNavigation, BottomNavigationTab } from '@ui-kitten/components';
 
@@ -44,10 +43,6 @@ const BottomTabNavigator = () => (
   </BottomStack.Navigator>
 );
 
-const Navigator: React.FC = () => (
-  <NavigationContainer>
-    <BottomTabNavigator />
-  </NavigationContainer>
-);
+const Navigator: React.FC = () => <BottomTabNavigator />;
 
 export default Navigator;
