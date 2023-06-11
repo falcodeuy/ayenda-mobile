@@ -3,15 +3,36 @@ import React, { ReactElement, useState } from 'react';
 import { StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
 import Icon from '../../components/Icon';
 import Divider from '../../components/Divider';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { loginUser } from '../../api/endpoints';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import Spinner from '../../components/Spinner';
 
 const Login = ({ navigation }): React.ReactElement => {
+  const queryClient = useQueryClient();
+
+  const loginUserMutation = useMutation(
+    (loginData: { username: string; password: string }) => loginUser(loginData)
+  );
+
+  const handleLoginUser = async () => {
+    try {
+      const userLogged = await loginUserMutation.mutateAsync({
+        username: email,
+        password,
+      });
+
+      queryClient.setQueryData(['credentials'], userLogged);
+      console.log('Usuario Logueado:', userLogged);
+      navigation && navigation.navigate('App');
+    } catch (error) {
+      console.log('Error al crear el usuario:', error);
+    }
+  };
+
   const [email, setEmail] = useState<string>();
   const [password, setPassword] = useState<string>();
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
-
-  const onSignInButtonPress = (): void => {
-    navigation && navigation.goBack();
-  };
 
   const onSignUpButtonPress = (): void => {
     navigation && navigation.navigate('SignUp');
@@ -35,85 +56,89 @@ const Login = ({ navigation }): React.ReactElement => {
 
   return (
     <>
-      {/* <KeyboardAvoidingView behavior="padding" style={styles.container}> */}
-      <Layout style={styles.container}>
-        <Layout style={styles.headerContainer}>
-          <Text category="h1">Bienvenido!</Text>
-          <Text category="s1">Inicia sesión en tu cuenta</Text>
-        </Layout>
-        <Layout style={styles.formContainer}>
-          <Input
-            // status='control'
-            placeholder="Email"
-            accessoryRight={<Icon name="person" />}
-            value={email}
-            onChangeText={setEmail}
-          />
-          <Input
-            style={styles.passwordInput}
-            // status={passwordVisible ? 'control' : 'danger'}
-            placeholder="Contraseña"
-            accessoryRight={renderPasswordIcon}
-            value={password}
-            secureTextEntry={!passwordVisible}
-            onChangeText={setPassword}
-          />
-          <Layout style={styles.forgotPasswordContainer}>
-            <Button
-              style={styles.forgotPasswordButton}
-              appearance="ghost"
+      <Spinner visible={loginUserMutation.isLoading} fullscreen={true} />
+      <KeyboardAwareScrollView
+        contentContainerStyle={{ flexGrow: 1 }}
+        style={{ flex: 1 }}
+      >
+        <Layout style={styles.container}>
+          <Layout style={styles.headerContainer}>
+            <Text category="h1">Bienvenido!</Text>
+            <Text category="s1">Inicia sesión en tu cuenta</Text>
+          </Layout>
+          <Layout style={styles.formContainer}>
+            <Input
               // status='control'
-              onPress={onForgotPasswordButtonPress}
-            >
-              ¿Olvidaste tu contraseña?
-            </Button>
+              placeholder="Email"
+              accessoryRight={<Icon name="person" />}
+              value={email}
+              onChangeText={setEmail}
+            />
+            <Input
+              style={styles.passwordInput}
+              // status={passwordVisible ? 'control' : 'danger'}
+              placeholder="Contraseña"
+              accessoryRight={renderPasswordIcon}
+              value={password}
+              secureTextEntry={!passwordVisible}
+              onChangeText={setPassword}
+            />
+            <Layout style={styles.forgotPasswordContainer}>
+              <Button
+                style={styles.forgotPasswordButton}
+                appearance="ghost"
+                // status='control'
+                onPress={onForgotPasswordButtonPress}
+              >
+                ¿Olvidaste tu contraseña?
+              </Button>
+            </Layout>
           </Layout>
-        </Layout>
-        <Button
-          style={styles.signInButton}
-          size="giant"
-          onPress={onSignInButtonPress}
-        >
-          INICIAR SESIÓN
-        </Button>
-        <Layout style={styles.socialAuthContainer}>
-          <Layout style={styles.socialAuthTextContainer}>
-            <Divider size={100} />
-            <Text style={styles.socialAuthHintText}>o continuar con</Text>
-            <Divider size={100} />
-          </Layout>
+          <Button
+            style={styles.signInButton}
+            size="giant"
+            onPress={handleLoginUser}
+          >
+            INICIAR SESIÓN
+          </Button>
+          <Layout style={styles.socialAuthContainer}>
+            <Layout style={styles.socialAuthTextContainer}>
+              <Divider size={100} />
+              <Text style={styles.socialAuthHintText}>o continuar con</Text>
+              <Divider size={100} />
+            </Layout>
 
-          <Layout style={styles.socialAuthButtonsContainer}>
-            <Button
-              appearance="ghost"
-              // status='control'
-              size="giant"
-              accessoryLeft={<Icon name="google" />}
-            />
-            <Button
-              appearance="ghost"
-              // status='control'
-              size="giant"
-              accessoryLeft={<Icon name="facebook" />}
-            />
-            <Button
-              appearance="ghost"
-              // status='control'
-              size="giant"
-              accessoryLeft={<Icon name="twitter" />}
-            />
+            <Layout style={styles.socialAuthButtonsContainer}>
+              <Button
+                appearance="ghost"
+                // status='control'
+                size="giant"
+                accessoryLeft={<Icon name="google" />}
+              />
+              <Button
+                appearance="ghost"
+                // status='control'
+                size="giant"
+                accessoryLeft={<Icon name="facebook" />}
+              />
+              <Button
+                appearance="ghost"
+                // status='control'
+                size="giant"
+                accessoryLeft={<Icon name="twitter" />}
+              />
+            </Layout>
           </Layout>
+          <Button
+            style={styles.signUpButton}
+            appearance="ghost"
+            // status='control'
+            onPress={onSignUpButtonPress}
+          >
+            ¿Nuevo en Ayenda? Regístrate
+          </Button>
         </Layout>
-        <Button
-          style={styles.signUpButton}
-          appearance="ghost"
-          // status='control'
-          onPress={onSignUpButtonPress}
-        >
-          ¿Nuevo en Ayenda? Regístrate
-        </Button>
-      </Layout>
-      {/* </KeyboardAvoidingView> */}
+      </KeyboardAwareScrollView>
     </>
   );
 };
@@ -130,6 +155,7 @@ const styles = StyleSheet.create({
   formContainer: {
     flex: 1,
     paddingHorizontal: 16,
+    marginBottom: 32,
   },
   signInLabel: {
     marginTop: 16,
