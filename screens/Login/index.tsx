@@ -12,23 +12,18 @@ const Login = ({ navigation }): React.ReactElement => {
   const queryClient = useQueryClient();
 
   const loginUserMutation = useMutation(
-    (loginData: { username: string; password: string }) => loginUser(loginData)
-  );
-
-  const handleLoginUser = async () => {
-    try {
-      const userLogged = await loginUserMutation.mutateAsync({
-        username: email,
-        password,
-      });
-
-      queryClient.setQueryData(['credentials'], userLogged);
-      console.log('Usuario Logueado:', userLogged);
-      navigation && navigation.navigate('App');
-    } catch (error) {
-      console.log('Error al crear el usuario:', error);
+    (loginData: { username: string; password: string }) => loginUser(loginData),
+    {
+      onSuccess: (userLogged) => {
+        queryClient.setQueryData(['credentials'], userLogged);
+        navigation && navigation.navigate('App');
+        console.log('Usuario Logueado:', userLogged);
+      },
+      onError: (error) => {
+        console.log('Error al loguear el usuario:', error);
+      }
     }
-  };
+  );
 
   const [email, setEmail] = useState<string>();
   const [password, setPassword] = useState<string>();
@@ -97,7 +92,7 @@ const Login = ({ navigation }): React.ReactElement => {
           <Button
             style={styles.signInButton}
             size="giant"
-            onPress={handleLoginUser}
+            onPress={() => loginUserMutation.mutate({ username: email, password })}
           >
             INICIAR SESIÓN
           </Button>

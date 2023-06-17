@@ -7,7 +7,7 @@ import {
   useStyleSheet,
   useTheme,
 } from '@ui-kitten/components';
-import React, { ReactElement, useCallback, useState } from 'react';
+import React, { ReactElement, useState } from 'react';
 import { TouchableWithoutFeedback, View } from 'react-native';
 import Icon from '../../components/Icon';
 import Divider from '../../components/Divider';
@@ -31,21 +31,19 @@ type UserDataProps = {
 const SignUp = ({ navigation }): React.ReactElement => {
   const queryClient = useQueryClient();
 
-  const createUserMutation = useMutation((userData: UserDataProps) =>
-    createUser(userData)
-  );
-
-  const handleCreateUser = async () => {
-    try {
-      const newUser = await createUserMutation.mutateAsync(userData);
-
-      queryClient.setQueryData(['user'], newUser);
-      console.log('Usuario creado:', newUser);
-      navigation && navigation.navigate('Login');
-    } catch (error) {
-      console.log('Error al crear el usuario:', error);
+  const createUserMutation = useMutation(
+    (userData: UserDataProps) => createUser(userData),
+    {
+      onSuccess: (newUser) => {
+        queryClient.setQueryData(['user'], newUser);
+        navigation && navigation.navigate('Login');
+        console.log('Usuario creado con éxito:', newUser);
+      },
+      onError: (error) => {
+        console.log('Error al crear el usuario:', error);
+      },
     }
-  };
+  );
 
   const [userData, setUserData] = useState<UserDataProps>({
     username: '',
@@ -93,15 +91,6 @@ const SignUp = ({ navigation }): React.ReactElement => {
         <Icon {...props} name={password2Visible ? 'eye-off' : 'eye'} />
       </View>
     </TouchableWithoutFeedback>
-  );
-
-  const renderCheckboxLabel = useCallback(
-    (evaProps) => (
-      <Text {...evaProps} style={styles.termsCheckBoxText}>
-        Acepto los Términos y Condiciones
-      </Text>
-    ),
-    []
   );
 
   const renderEditAvatarButton = (): React.ReactElement => (
@@ -179,7 +168,7 @@ const SignUp = ({ navigation }): React.ReactElement => {
           <Button
             style={styles.signUpButton}
             size="giant"
-            onPress={handleCreateUser}
+            onPress={() => createUserMutation.mutate(userData)}
           >
             CREAR CUENTA
           </Button>
