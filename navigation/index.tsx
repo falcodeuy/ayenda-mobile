@@ -15,12 +15,9 @@ const BottomTabBar = ({ navigation, state }) => (
     selectedIndex={state.index}
     onSelect={(index) => navigation.navigate(state.routeNames[index])}
   >
-    <BottomNavigationTab title="Agenda" icon={<Icon name="calendar" />} />
-    <BottomNavigationTab
-      title="Estadísticas"
-      icon={<Icon name="bar-chart" />}
-    />
-    <BottomNavigationTab title="Perfil" icon={<Icon name="person" />} />
+    <BottomNavigationTab icon={<Icon name="calendar" size={30} />} />
+    <BottomNavigationTab icon={<Icon name="bar-chart" size={30} />} />
+    <BottomNavigationTab icon={<Icon name="person" size={30} />} />
   </BottomNavigation>
 );
 

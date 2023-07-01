@@ -3,7 +3,8 @@ import { ApplicationProvider, IconRegistry } from '@ui-kitten/components';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 
-import { default as theme } from './theme.json';
+import lightTheme from './lightTheme.json';
+import darkTheme from './darkTheme.json';
 import {
   SafeAreaProvider,
   useSafeAreaInsets,
@@ -40,7 +41,7 @@ CustomStatusBarProps): React.ReactElement => {
 
 export default () => {
   const queryClient = new QueryClient();
-  const darkMode = false;
+  const darkMode = true;
   const Stack = createStackNavigator();
 
   return (
@@ -54,7 +55,9 @@ export default () => {
         <ApplicationProvider
           {...eva}
           theme={
-            darkMode ? { ...eva.dark, ...theme } : { ...eva.light, ...theme }
+            darkMode
+              ? { ...eva.dark, ...darkTheme }
+              : { ...eva.light, ...lightTheme }
           }
         >
           <NavigationContainer>
