@@ -22,7 +22,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
   } = useQuery(['services'], () => getServices());
 
   if (isLoading) {
-    return <Spinner />;
+    return <Spinner visible />;
   }
 
   if (isError) {

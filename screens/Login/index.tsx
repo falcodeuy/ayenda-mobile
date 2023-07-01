@@ -12,7 +12,7 @@ const Login = ({ navigation }): React.ReactElement => {
   const queryClient = useQueryClient();
 
   const loginUserMutation = useMutation(
-    (loginData: { username: string; password: string }) => loginUser(loginData),
+    (loginData: { email: string; password: string }) => loginUser(loginData),
     {
       onSuccess: (userLogged) => {
         queryClient.setQueryData(['credentials'], userLogged);
@@ -21,7 +21,7 @@ const Login = ({ navigation }): React.ReactElement => {
       },
       onError: (error) => {
         console.log('Error al loguear el usuario:', error);
-      }
+      },
     }
   );
 
@@ -92,7 +92,7 @@ const Login = ({ navigation }): React.ReactElement => {
           <Button
             style={styles.signInButton}
             size="giant"
-            onPress={() => loginUserMutation.mutate({ username: email, password })}
+            onPress={() => loginUserMutation.mutate({ email, password })}
           >
             INICIAR SESIÓN
           </Button>

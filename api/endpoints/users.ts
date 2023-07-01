@@ -14,7 +14,7 @@ const createUser = async (signUpData: {
   return response.data;
 };
 
-const loginUser = async (loginData: { username: string; password: string }) => {
+const loginUser = async (loginData: { email: string; password: string }) => {
   const url = '/auth/token/';
 
   const response = await axiosInstance.post(url, loginData);
